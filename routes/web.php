@@ -22,3 +22,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/members', 'MembersController@index');
 Route::post('/members', 'MembersController@store');
 Route::get('/members/create', 'MembersController@create');
+Route::get('/members/print/{id}', 'MembersController@print');

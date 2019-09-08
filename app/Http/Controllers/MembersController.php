@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use App\Members;
 
 class MembersController extends Controller
@@ -25,28 +26,31 @@ class MembersController extends Controller
       return view('members.create');
     }
     public function store() {
+      //dd(storage_path() . "\\app\\public\\uploads\\" );
       $data = request()->validate([
-        'firstname' => 'required',
-        'lastname' => 'required',
+        'name' => 'required',
         'affiliation' => 'required',
         'contact_number' => 'required',
         'email' => 'required|email|unique:members',
+        'photo' => 'required',
       ]);
+      $data[ 'photo' ] = str_replace('data:image/jpeg;base64,', '', $data[ 'photo' ] );
+      $data[ 'photo' ] = str_replace(' ', '+', $data[ 'photo' ] );
+      $imageName = str_random(10).'.'.'jpg';
+      \File::put(storage_path() . "\\app\\public\\uploads\\" . $imageName, base64_decode( $data[ 'photo' ] ));
       //dd($data);
-      // $member = new Members();
-      // $member->firstname = $data['firstname'];
-      // $member->lastname = $data['lastname'];
-      // $member->affiliation = $data['affiliation'];
-      // $member->contact_number = $data['contact_number'];
-      // $member->email = $data['email'];
-      // $member->save();
-      Members::create([
-        'firstname' => $data['firstname'],
-        'lastname' => $data['lastname'],
+
+      $id = Members::create([
+        'name' => $data['name'],
         'affiliation' => $data['affiliation'],
         'contact_number' => $data['contact_number'],
         'email' => $data['email'],
-      ]);
-      return back();
+        'photo' => $imageName,
+      ])->id;
+      return redirect( '/members/print/' . $id );
+    }
+    public function print( $id ) {
+      $member = Members::findOrFail( $id );
+      return view( 'members.print', compact( 'member' ) );
     }
 }

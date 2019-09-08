@@ -1,0 +1,38 @@
+#your_name {
+  position: absolute; top: 168px; color: #f37a2b; left: 0; font-size: 14px; text-transform: uppercase; text-align: center; width: 100%;
+}
+
+#your_id {
+  position: absolute;
+  top: 154px;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+#your_aff {
+  position: absolute; top: 185px; color: #0f212b; width: 100%; text-align: center; font-size: 12px; text-transform: uppercase; line-height: 10px;
+}
+
+#results {
+  background: url(/storage/uploads/id-draft.jpg) top left no-repeat #fff; width: 180px; height: 260px; background-size: 100%;
+}
+
+#photo-id {
+  width: 94px; border-radius: 50%; height: 94px; position: absolute; top: 56px; left: 43px;
+}
+
+#id-wrapper {
+  width: 180px; height: 288px; position: relative;
+}
+
+#your_contact_number {
+  position: absolute;
+  top: 232px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 10px;
+  display: none;
+}

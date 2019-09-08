@@ -7,15 +7,19 @@
           <h1>{{ __('Members') }}</h1>
           <table class="table table-bordered">
             <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
+              <th>Name</th>
               <th>Email</th>
+              <th>Contact</th>
+              <th>Company / School</th>
+              <th></th>
             </tr>
             @foreach( $members as $member )
             <tr>
-              <td>{{ $member->firstname }}</td>
-              <td>{{ $member->lastname }}</td>
+              <td>{{ $member->name }}</td>
               <td>{{ $member->email }}</td>
+              <td>{{ $member->contact_number }}</td>
+              <td>{{ $member->affiliation }}</td>
+              <td><a href="/members/print/{{ $member->id }}">Print</a></td>
             </tr>
             @endforeach
           </table>
